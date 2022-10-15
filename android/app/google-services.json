@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "587483233413",
+    "project_id": "adotepet-bd6b0",
+    "storage_bucket": "adotepet-bd6b0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:587483233413:android:7ad10acf606b84be9bfdec",
+        "android_client_info": {
+          "package_name": "com.paola.adotepet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "587483233413-rag81d1q8924oa8qpj76ddi9gtg82rl1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3EW0m0JVHz62luVHfEwJ6WeHhN3AedNY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "587483233413-rag81d1q8924oa8qpj76ddi9gtg82rl1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
