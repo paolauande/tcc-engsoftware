@@ -129,6 +129,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       showSpinner = false;
                     });
                   }),
+              DefaultButton(
+                  colour: Colors.white,
+                  title: 'Cadastrar',
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'registration_screen');
+                  }),
             ],
           ),
         ),

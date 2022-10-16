@@ -164,7 +164,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     showSpinner = false;
                   });
                 },
-              )
+              ),
+              DefaultButton(
+                  colour: Colors.white,
+                  title: 'Já tenho login',
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'login_screen');
+                  }),
             ],
           ),
         ),
