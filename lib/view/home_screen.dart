@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-late User loggedinUser;
+User loggedinUser;
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -30,19 +30,58 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: null,
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.close),
-              onPressed: () {
-                _auth.signOut();
-                Navigator.pop(context);
-              }),
-        ],
-        title: Text('Bem vindo'),
-        backgroundColor: Colors.purpleAccent,
-      ),
-    );
+        appBar: AppBar(
+          leading: Icon(Icons.account_circle_rounded),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.exit_to_app),
+                onPressed: () {
+                  _auth.signOut();
+                  Navigator.pop(context);
+                }),
+          ],
+          backgroundColor: Color(0xFFF755FEB),
+        ),
+        body: Column(
+          children: [
+            Container(
+                width: MediaQuery.of(context).size.width,
+                color: Color(0xFFF755FEB),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Text(
+                        "Você conhece algum cachorro ou gato que\nprecisa de um novo lar? \ncadastre agora",
+                        style: TextStyle(
+                            fontFamily: 'Nunito',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                            color: Colors.white),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: OutlinedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, 'register_screen');
+                        },
+                        style: OutlinedButton.styleFrom(
+                          side: BorderSide(width: 1.0, color: Colors.white),
+                        ),
+                        child: const Text(
+                          "cadastrar pet",
+                          style: TextStyle(
+                              fontFamily: 'Nunito',
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                )),
+          ],
+        ));
   }
 }

@@ -20,17 +20,17 @@ const kTextFieldDecoration = InputDecoration(
   ),
 );
 
-class RegistrationScreen extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   @override
-  _RegistrationScreenState createState() => _RegistrationScreenState();
+  _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-class _RegistrationScreenState extends State<RegistrationScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final _auth = FirebaseAuth.instance;
-  late String name;
-  late String cellphone;
-  late String email;
-  late String password;
+  String name;
+  String cellphone;
+  String email;
+  String password;
   bool showSpinner = false;
   @override
   Widget build(BuildContext context) {

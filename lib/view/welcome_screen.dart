@@ -28,7 +28,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     colour: Colors.white,
                     title: 'Cadastrar',
                     onPressed: () {
-                      Navigator.pushNamed(context, 'registration_screen');
+                      Navigator.pushNamed(context, 'sign_up_screen');
                     }),
               ]),
         ));
