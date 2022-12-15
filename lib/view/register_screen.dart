@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:adotepet/utils/default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key key}) : super(key: key);
@@ -25,10 +28,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     'Marrom',
     'Mesclado'
   ];
+  File imageFile;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Color(0xFFF755FEB),
       ),
@@ -78,6 +83,55 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    TextField(
+                      style: TextStyle(
+                          fontFamily: 'Nunito',
+                          fontWeight: FontWeight.w700,
+                          fontSize: 14,
+                          color: Colors.black),
+                      decoration: InputDecoration(
+                        hintStyle: TextStyle(
+                            fontFamily: 'Nunito',
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                            color: Colors.black),
+                        hintText: "Nome",
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      child: imageFile == null
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      _getFromGallery();
+                                    },
+                                    child: Text(
+                                      "Escolha uma foto da galeria",
+                                      style: TextStyle(
+                                          fontFamily: 'Nunito',
+                                          fontWeight: FontWeight.w700,
+                                          fontSize: 14,
+                                          color: Colors.black),
+                                    ),
+                                  ),
+                                  Container(
+                                    height: 14,
+                                  )
+                                ])
+                          : Container(
+                              width: 200,
+                              height: 200,
+                              child: Image.file(
+                                imageFile,
+                                fit: BoxFit.fitHeight,
+                              ),
+                            ),
+                    ),
                     DropdownButton(
                       items: _petType
                           .map((value) => DropdownMenuItem(
@@ -123,10 +177,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 value: value,
                               ))
                           .toList(),
-                      onChanged: (selectedSize) {
-                        print('$selectedSize');
+                      onChanged: (selectedAccountSize) {
+                        print('$selectedAccountSize');
                         setState(() {
-                          selectedSize = selectedSize;
+                          selectedSize = selectedAccountSize;
                         });
                       },
                       value: selectedSize,
@@ -154,10 +208,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 value: value,
                               ))
                           .toList(),
-                      onChanged: (selectedGender) {
-                        print('$selectedGender');
+                      onChanged: (selectedAccountGender) {
+                        print('$selectedAccountGender');
                         setState(() {
-                          selectedGender = selectedGender;
+                          selectedGender = selectedAccountGender;
                         });
                       },
                       value: selectedGender,
@@ -185,10 +239,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 value: value,
                               ))
                           .toList(),
-                      onChanged: (selectedColor) {
-                        print('$selectedColor');
+                      onChanged: (selectedAccountColor) {
+                        print('$selectedAccountColor');
                         setState(() {
-                          selectedColor = selectedColor;
+                          selectedColor = selectedAccountColor;
                         });
                       },
                       value: selectedColor,
@@ -215,5 +269,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
+  }
+
+  _getFromGallery() async {
+    PickedFile pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+      maxWidth: 1800,
+      maxHeight: 1800,
+    );
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+      });
+    }
   }
 }

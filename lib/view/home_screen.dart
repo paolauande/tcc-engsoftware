@@ -30,16 +30,58 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: Icon(Icons.account_circle_rounded),
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.exit_to_app),
-                onPressed: () {
+        drawer: Drawer(
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+              const DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Color(0xFFF755FEB),
+                ),
+                child: Text(
+                  'Seja bem vindo!',
+                  style: TextStyle(
+                      fontFamily: 'Nunito',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                      color: Colors.white),
+                ),
+              ),
+              ListTile(
+                leading: Icon(Icons.person),
+                title: const Text(
+                  'Meu Perfil',
+                  style: TextStyle(
+                      fontFamily: 'Nunito',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                      color: Colors.black),
+                ),
+                onTap: () {
+                  // Update the state of the app.
+                  // ...
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.exit_to_app),
+                title: const Text(
+                  'Sair do app',
+                  style: TextStyle(
+                      fontFamily: 'Nunito',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                      color: Colors.black),
+                ),
+                onTap: () {
                   _auth.signOut();
                   Navigator.pop(context);
-                }),
-          ],
+                },
+              ),
+            ],
+          ),
+        ),
+        appBar: AppBar(
           backgroundColor: Color(0xFFF755FEB),
         ),
         body: Column(
