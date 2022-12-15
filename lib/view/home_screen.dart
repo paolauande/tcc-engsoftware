@@ -75,7 +75,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 onTap: () {
                   _auth.signOut();
-                  Navigator.pop(context);
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                      'login_screen', (Route<dynamic> route) => false);
                 },
               ),
             ],
@@ -123,6 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 )),
+            Container()
           ],
         ));
   }
