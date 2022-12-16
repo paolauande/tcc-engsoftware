@@ -1,11 +1,31 @@
+import 'dart:io';
+
+import 'package:adotepet/view/pet_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 User loggedinUser;
 
 class HomeScreen extends StatefulWidget {
+  String value;
+  var selectedColor;
+  var selectedGender;
+  var selectedType;
+  var selectedSize;
+  File imageFile;
+  HomeScreen(
+      {Key key,
+      this.value,
+      this.selectedColor,
+      this.imageFile,
+      this.selectedGender,
+      this.selectedSize,
+      this.selectedType})
+      : super(key: key);
+
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomeScreenState createState() => _HomeScreenState(value, selectedColor,
+      imageFile, selectedGender, selectedSize, selectedType);
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -27,6 +47,14 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  String value;
+  var selectedColor;
+  var selectedGender;
+  var selectedType;
+  var selectedSize;
+  File imageFile;
+  _HomeScreenState(this.value, this.selectedColor, this.imageFile,
+      this.selectedGender, this.selectedSize, this.selectedType);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,7 +152,52 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ],
                 )),
-            Container()
+            SingleChildScrollView(
+              child: value == null &&
+                      selectedType == null &&
+                      selectedColor == null &&
+                      selectedGender == null &&
+                      selectedSize == null &&
+                      imageFile == null
+                  ? Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                          child: Text("Sem pets cadastrados!",
+                              style: TextStyle(
+                                  fontFamily: 'Nunito',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 20,
+                                  color: Colors.black))),
+                    )
+                  : Container(
+                      child: Card(
+                          child: ListTile(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => PetScreen(
+                                value: value,
+                                selectedColor: selectedColor,
+                                imageFile: imageFile,
+                                selectedGender: selectedGender,
+                                selectedSize: selectedSize,
+                                selectedType: selectedType)));
+                      },
+                      title: Text(value,
+                          style: TextStyle(
+                              fontFamily: 'Nunito',
+                              fontWeight: FontWeight.w600,
+                              fontSize: 20,
+                              color: Colors.black)),
+                      subtitle: Text(
+                          "$selectedType, $selectedColor , $selectedGender, $selectedSize",
+                          style: TextStyle(
+                              fontFamily: 'Nunito',
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14,
+                              color: Colors.black)),
+                      leading: Image.file(imageFile),
+                    ))),
+            )
           ],
         ));
   }

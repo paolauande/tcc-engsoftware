@@ -8,6 +8,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'home_screen.dart';
+
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key key}) : super(key: key);
 
@@ -17,6 +19,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool showSpinner = false;
+  String value;
   var selectedColor, selectedGender, selectedSize, selectedType;
   List<String> _petType = <String>['Cachorro', 'Gato'];
   List<String> _petSize = <String>['Pequeno', 'Médio', 'Grande'];
@@ -84,6 +87,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     TextField(
+                      onChanged: (text) {
+                        setState(() {
+                          value = text;
+                        });
+                      },
                       style: TextStyle(
                           fontFamily: 'Nunito',
                           fontWeight: FontWeight.w700,
@@ -259,7 +267,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     DefaultButton(
                       colour: Colors.white,
                       title: 'Publicar',
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => HomeScreen(
+                                value: value,
+                                selectedColor: selectedColor,
+                                selectedSize: selectedSize,
+                                selectedType: selectedType,
+                                selectedGender: selectedGender,
+                                imageFile: imageFile)));
+                      },
                     )
                   ],
                 ),
